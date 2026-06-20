@@ -103,6 +103,17 @@ function matches(x){
     locationOk &&
     ($('filterB').value==='all' || x.status === $('filterB').value);
 }
+function seedWikiTitle(x){return clean(x.wikiTitle || x.name).replace(/\s+/g,' ');}
+function seedImage(x){return wikiImageCache.get(seedWikiTitle(x)) || null;}
+function seedImageBlock(x){const img=seedImage(x); return img&&img.src ? '<div class="card-image"><img loading="lazy" src="'+esc(img.src)+'" alt="'+esc(x.name)+'"></div>' : '<div class="thumb-placeholder">Wikipedia image loading…</div>';}
+async function fetchSeedImages(){
+  const titles=[...new Set(seeds.map(seedWikiTitle).filter(Boolean))];
+  for(let i=0;i<titles.length;i+=8){
+    const batch=titles.slice(i,i+8);
+    const url='https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&redirects=1&prop=pageimages|info&inprop=url&piprop=thumbnail&pithumbsize=800&titles='+encodeURIComponent(batch.join('|'));
+    try{const res=await fetch(url); const data=await res.json(); const pages=Object.values((data.query&&data.query.pages)||{}); pages.forEach(p=>{if(p&&p.title){wikiImageCache.set(p.title,{src:p.thumbnail&&p.thumbnail.source?p.thumbnail.source:'',page:p.fullurl||''});}}); batch.forEach(t=>{if(!wikiImageCache.has(t)) wikiImageCache.set(t,{src:'',page:''});}); if(mode==='seeds') render();}catch(e){console.error(e);}
+  }
+}
 function render(){
   items=current();
   const list=items.filter(matches);
