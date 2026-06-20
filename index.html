@@ -1,19 +1,154 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Silveira Botanics</title>
-<style>:root{--bg:#0b1220;--panel:#111827;--line:#26354f;--text:#e5e7eb;--muted:#94a3b8;--green:#34d399;--amber:#fbbf24}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#15382e 0,#0b1220 35%,#07101d 100%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:10;background:rgba(7,16,29,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.wrap,main{max-width:1280px;margin:0 auto;padding:18px}h1{margin:0;color:var(--green);font-size:clamp(24px,4vw,34px)}.subtitle{color:var(--muted);font-size:14px;margin-top:4px}.tabs,.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button,input,select{background:#0f172a;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}button{cursor:pointer}.active{border-color:var(--green);color:var(--green);background:rgba(6,78,59,.35)}input{min-width:min(370px,100%)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.stat{background:rgba(17,24,39,.75);border:1px solid var(--line);border-radius:14px;padding:12px}.num{font-size:24px;font-weight:800}.label{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:5px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}.card{background:linear-gradient(180deg,rgba(17,24,39,.97),rgba(15,23,42,.97));border:1px solid var(--line);border-radius:18px;overflow:hidden;min-height:315px;display:flex;flex-direction:column;cursor:pointer}.card:hover{border-color:#3f567a}.body{padding:15px;display:flex;flex-direction:column;gap:12px;flex:1}.top{display:flex;justify-content:space-between;gap:10px}.badge{font-size:11px;border:1px solid var(--line);background:#0b1220;border-radius:999px;padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.family{color:var(--green);border-color:#14532d;background:rgba(6,78,59,.35)}.priority{color:var(--amber);border-color:#78350f;background:rgba(120,53,15,.25)}.name{font-size:20px;font-weight:800;font-style:italic;line-height:1.15}.common{color:var(--muted);font-size:13px;margin-top:3px}.notes{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:10px;font-size:12px;line-height:1.45;color:#cbd5e1;min-height:70px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini div{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:9px;min-width:0}.value{display:block;font-size:12px;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.footer{border-top:1px solid rgba(38,53,79,.8);padding-top:10px;display:flex;justify-content:space-between;gap:10px;color:#718096;font-size:11px}.empty{text-align:center;padding:50px 20px;color:var(--muted);border:1px dashed var(--line);border-radius:18px;background:rgba(17,24,39,.45);grid-column:1/-1}dialog{border:1px solid var(--line);border-radius:20px;background:#0f172a;color:var(--text);max-width:min(980px,94vw);width:980px;padding:0}dialog::backdrop{background:rgba(0,0,0,.65)}.modal-head{padding:18px 20px;background:#111827;border-bottom:1px solid var(--line);border-radius:20px 20px 0 0;display:flex;justify-content:space-between;gap:12px}.modal-body{padding:18px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-height:72vh;overflow:auto}.field{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:10px}.full{grid-column:1/-1}.field-title{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:6px}.field-value{font-size:13px;color:#e2e8f0;line-height:1.45;word-break:break-word}@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.modal-body{grid-template-columns:1fr}input,select{width:100%}}</style></head><body>
-<header><div class="wrap"><h1>🌿 Silveira Botanics</h1><div class="subtitle">Plant and seed catalogue</div><div class="tabs"><button id="plantsBtn" class="active">Plants</button><button id="seedsBtn">Seeds</button></div><div class="controls"><input id="search" type="search" placeholder="Search..."><select id="priority"><option value="all">All priorities</option><option value="5">★★★★★ only</option><option value="4">★★★★ and up</option><option value="3">★★★ and up</option></select><select id="filterA"><option value="all">All locations</option></select><select id="filterB"><option value="all">All statuses</option></select></div><div class="stats"><div class="stat"><div class="num" id="total">—</div><div class="label" id="totalLabel">Total</div></div><div class="stat"><div class="num" id="shown">—</div><div class="label">Shown</div></div><div class="stat"><div class="num" id="high">—</div><div class="label" id="highLabel">High</div></div><div class="stat"><div class="num" id="extra">—</div><div class="label" id="extraLabel">Extra</div></div></div><p id="status" class="subtitle">Loading…</p></div></header><main><div id="grid" class="grid"><div class="empty">Loading catalogue…</div></div></main><dialog id="dlg"><div class="modal-head"><div><div id="badges"></div><div id="title" class="name"></div><div id="common" class="common"></div></div><button onclick="dlg.close()">Close</button></div><div id="modal" class="modal-body"></div></dialog>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Silveira Botanics</title>
+<style>
+:root{--bg:#0b1220;--panel:#111827;--line:#26354f;--text:#e5e7eb;--muted:#94a3b8;--green:#34d399;--amber:#fbbf24}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top left,#15382e 0,#0b1220 35%,#07101d 100%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:20;background:rgba(7,16,29,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.wrap{max-width:1280px;margin:0 auto;padding:18px}h1{margin:0;color:var(--green);font-size:clamp(24px,4vw,34px)}.subtitle{color:var(--muted);font-size:14px;margin-top:4px}.tabs,.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button,input,select{background:#0f172a;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}button{cursor:pointer}.tab.active{border-color:var(--green);color:var(--green);background:rgba(6,78,59,.35)}input{min-width:min(370px,100%)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.stat{background:rgba(17,24,39,.75);border:1px solid var(--line);border-radius:14px;padding:12px}.num{font-size:24px;font-weight:800}.label{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:5px}main{max-width:1280px;margin:0 auto;padding:20px 18px 60px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}.card{background:linear-gradient(180deg,rgba(17,24,39,.97),rgba(15,23,42,.97));border:1px solid var(--line);border-radius:18px;overflow:hidden;min-height:315px;display:flex;flex-direction:column;cursor:pointer}.card:hover{border-color:#3f567a}.body{padding:15px;display:flex;flex-direction:column;gap:12px;flex:1}.top{display:flex;justify-content:space-between;gap:10px}.badge{font-size:11px;border:1px solid var(--line);background:#0b1220;border-radius:999px;padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.family{color:var(--green);border-color:#14532d;background:rgba(6,78,59,.35)}.priority{color:var(--amber);border-color:#78350f;background:rgba(120,53,15,.25)}.name{font-size:20px;font-weight:800;font-style:italic;line-height:1.15}.common{color:var(--muted);font-size:13px;margin-top:3px}.notes{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:10px;font-size:12px;line-height:1.45;color:#cbd5e1;min-height:70px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini div{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:9px;min-width:0}.value{display:block;font-size:12px;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.footer{border-top:1px solid rgba(38,53,79,.8);padding-top:10px;display:flex;justify-content:space-between;gap:10px;color:#718096;font-size:11px}.empty{text-align:center;padding:50px 20px;color:var(--muted);border:1px dashed var(--line);border-radius:18px;background:rgba(17,24,39,.45);grid-column:1/-1}dialog{border:1px solid var(--line);border-radius:20px;background:#0f172a;color:var(--text);max-width:min(980px,94vw);width:980px;padding:0}dialog::backdrop{background:rgba(0,0,0,.65)}.modal-head{padding:18px 20px;background:#111827;border-bottom:1px solid var(--line);border-radius:20px 20px 0 0;display:flex;justify-content:space-between;gap:12px}.modal-body{padding:18px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-height:72vh;overflow:auto}.field{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:10px}.field.full{grid-column:1/-1}.field-title{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:6px}.field-value{font-size:13px;color:#e2e8f0;line-height:1.45;word-break:break-word}@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.modal-body{grid-template-columns:1fr}input,select{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Silveira Botanics</h1>
+    <div class="subtitle">Plant and seed catalogue</div>
+    <div class="tabs">
+      <button id="plantsBtn" class="tab active">Plants</button>
+      <button id="seedsBtn" class="tab">Seeds</button>
+    </div>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search..." />
+      <select id="priority"><option value="all">All priorities</option><option value="5">★★★★★ only</option><option value="4">★★★★ and up</option><option value="3">★★★ and up</option></select>
+      <select id="filterA"><option value="all">All locations</option></select>
+      <select id="filterB"><option value="all">All statuses</option></select>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num" id="total">—</div><div class="label" id="totalLabel">Total</div></div>
+      <div class="stat"><div class="num" id="shown">—</div><div class="label">Shown</div></div>
+      <div class="stat"><div class="num" id="high">—</div><div class="label" id="highLabel">High</div></div>
+      <div class="stat"><div class="num" id="extra">—</div><div class="label" id="extraLabel">Extra</div></div>
+    </div>
+    <p id="status" class="subtitle">Loading...</p>
+  </div>
+</header>
+<main><div id="grid" class="grid"><div class="empty">Loading catalogue...</div></div></main>
+<dialog id="dlg"><div class="modal-head"><div><div id="badges"></div><div id="title" class="name"></div><div id="common" class="common"></div></div><button id="closeBtn">Close</button></div><div id="modal" class="modal-body"></div></dialog>
 <script>
-const plantMap={id:"Wishlist ID",priority:"Priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",origin:"Native origin",location:"Future location",difficulty:"Difficulty",notes:"Notes",confidence:"Confidence",light:"Light needs",water:"Water needs",soil:"Soil / substrate",buy:"Where to buy EU/UK"};
-const seedMap={id:"Seed Lot ID",priority:"Germination priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",origin:"Seed lot origin",location:"Seed lot origin",difficulty:"Viability status",notes:"Species notes",confidence:"Confidence",count:"Estimated seed count",sowby:"Estimated sow-by date",pretreat:"Pretreatment needed",germination:"Germination instructions",story:"Provenance story",legal:"Legal / public visibility",source:"Source type"};
-let mode='plants',plants=[],seeds=[],items=[],byKey=new Map();function clean(v){return(v??'').toString().trim()}function esc(v){return clean(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}function stars(v){return clean(v).split('★').length-1}
-function parseCSV(t){const rows=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i],n=t[i+1];if(ch==='"'&&q&&n==='"'){c+='"';i++}else if(ch==='"'){q=!q}else if(ch===','&&!q){r.push(c);c=''}else if((ch==='
-'||ch==='')&&!q){if(ch===''&&n==='
-')i++;r.push(c);rows.push(r);r=[];c=''}else c+=ch}r.push(c);rows.push(r);return rows.filter(x=>x.some(y=>clean(y)))}function objects(t){const m=parseCSV(t),h=(m[0]||[]).map(x=>clean(x).replace(/^﻿/,''));return m.slice(1).map(r=>{const o={};h.forEach((x,i)=>o[x]=r[i]??'');return o})}function transform(rows,map,type){return rows.map(row=>{const o={type};Object.entries(map).forEach(([k,col])=>o[k]=clean(row[col]));o.stars=stars(o.priority);o.key=type+':'+o.id;return o}).filter(x=>x.id&&x.name)}async function getCSV(u){const r=await fetch(u+'?v='+Date.now());if(!r.ok)throw Error(u);return r.text()}
-function unique(k){return [...new Set(items.map(x=>x[k]).filter(Boolean))].sort((a,b)=>a.localeCompare(b))}function fillFilters(){items=mode==='plants'?plants:seeds;filterA.innerHTML='<option value="all">'+(mode==='plants'?'All locations':'All origins')+'</option>';filterB.innerHTML='<option value="all">All statuses</option>';unique(mode==='plants'?'location':'origin').forEach(v=>filterA.innerHTML+=`<option>${esc(v)}</option>`);unique('status').forEach(v=>filterB.innerHTML+=`<option>${esc(v)}</option>`)}
-function match(x){const q=search.value.toLowerCase();return(!q||Object.values(x).join(' ').toLowerCase().includes(q))&&(priority.value==='all'||x.stars>=+priority.value)&&(filterA.value==='all'||x[mode==='plants'?'location':'origin']===filterA.value)&&(filterB.value==='all'||x.status===filterB.value)}
-function render(){items=mode==='plants'?plants:seeds;const list=items.filter(match);total.textContent=items.length;shown.textContent=list.length;totalLabel.textContent=mode==='plants'?'Total taxa':'Seed lots';highLabel.textContent=mode==='plants'?'★★★★★':'★★★★+';extraLabel.textContent=mode==='plants'?'Greenhouse':'Travel lots';high.textContent=mode==='plants'?items.filter(x=>x.stars===5).length:items.filter(x=>x.stars>=4).length;extra.textContent=mode==='plants'?items.filter(x=>x.location.toLowerCase().includes('greenhouse')).length:items.filter(x=>x.source?.toLowerCase().includes('travel')).length;if(!list.length){grid.innerHTML='<div class="empty">No matching records.</div>';return}grid.innerHTML=list.map(card).join('')}
-function card(x){return `<article class="card" onclick="openItem('${esc(x.key)}')"><div class="body"><div class="top"><span class="badge family">${esc(x.family||'—')}</span><span class="badge priority">${esc(x.priority||'—')}</span></div><div><div class="name">${esc(x.name)}</div><div class="common">${esc(x.common||'—')}</div></div><div class="notes"><span class="label">${mode==='plants'?'Notes':'Viability / notes'}</span>${esc(mode==='plants'?x.notes:(x.difficulty||x.notes||'—'))}</div><div class="mini"><div><span class="label">${mode==='plants'?'Location':'Count'}</span><span class="value">${esc(mode==='plants'?x.location:x.count||'—')}</span></div><div><span class="label">${mode==='plants'?'Difficulty':'Sow by'}</span><span class="value">${esc(mode==='plants'?x.difficulty:x.sowby||'—')}</span></div></div><div class="footer"><span>📍 ${esc(x.origin||'—')}</span><span>${esc(x.id)}</span></div></div></article>`}
-function openItem(k){const x=byKey.get(k);if(!x)return;badges.innerHTML=`<span class="badge family">${esc(x.family)}</span> <span class="badge priority">${esc(x.priority)}</span> <span class="badge">${esc(x.status)}</span>`;title.textContent=x.name;common.textContent=(x.common||'—')+' · '+x.id;const fields=mode==='plants'?[['id','ID'],['status','Status'],['priority','Priority'],['family','Family'],['origin','Origin'],['location','Location'],['difficulty','Difficulty'],['light','Light'],['water','Water'],['soil','Soil'],['buy','Where to buy'],['notes','Notes'],['confidence','Confidence']]:[['id','Seed Lot ID'],['status','Status'],['priority','Priority'],['family','Family'],['origin','Origin'],['source','Source type'],['count','Estimated count'],['difficulty','Viability'],['sowby','Sow by'],['pretreat','Pretreatment'],['germination','Germination'],['story','Provenance story'],['legal','Legal / visibility'],['notes','Species notes'],['confidence','Confidence']];modal.innerHTML=fields.map(([k,l])=>`<div class="field ${['notes','germination','story','legal','buy','soil','difficulty'].includes(k)?'full':''}"><div class="field-title">${esc(l)}</div><div class="field-value">${esc(x[k]||'—')}</div></div>`).join('');dlg.showModal()}
-function setMode(m){mode=m;plantsBtn.classList.toggle('active',m==='plants');seedsBtn.classList.toggle('active',m==='seeds');search.value='';priority.value='all';fillFilters();render()}plantsBtn.onclick=()=>setMode('plants');seedsBtn.onclick=()=>setMode('seeds');[search,priority,filterA,filterB].forEach(e=>{e.oninput=render;e.onchange=render});
-(async()=>{try{plants=transform(objects(await getCSV('plants.csv')),plantMap,'plants');seeds=transform(objects(await getCSV('seeds.csv')),seedMap,'seeds');byKey=new Map([...plants,...seeds].map(x=>[x.key,x]));fillFilters();render();status.textContent=`Loaded ${plants.length} plants and ${seeds.length} seed lots.`}catch(e){status.textContent='Could not load plants.csv / seeds.csv. Make sure both files are in the same GitHub folder.';grid.innerHTML='<div class="empty">Could not load catalogue files.</div>';console.error(e)}})();
-</script></body></html>
+const $ = (id) => document.getElementById(id);
+const plantMap = {id:"Wishlist ID",priority:"Priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",origin:"Native origin",location:"Future location",difficulty:"Difficulty",notes:"Notes",confidence:"Confidence",light:"Light needs",water:"Water needs",soil:"Soil / substrate",buy:"Where to buy EU/UK"};
+const seedMap = {id:"Seed Lot ID",priority:"Germination priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",origin:"Seed lot origin",location:"Seed lot origin",difficulty:"Viability status",notes:"Species notes",confidence:"Confidence",count:"Estimated seed count",sowby:"Estimated sow-by date",pretreat:"Pretreatment needed",germination:"Germination instructions",story:"Provenance story",legal:"Legal / public visibility",source:"Source type"};
+let mode = "plants";
+let plants = [];
+let seeds = [];
+let items = [];
+let byKey = new Map();
+function clean(v){return (v ?? "").toString().trim();}
+function esc(v){return clean(v).replace(/[&<>'"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c];});}
+function starCount(v){return clean(v).split("★").length - 1;}
+function parseCSV(text){
+  const rows=[]; let row=[]; let cell=""; let quote=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i]; const next=text[i+1];
+    if(ch==='"' && quote && next==='"'){cell+='"'; i++;}
+    else if(ch==='"'){quote=!quote;}
+    else if(ch===',' && !quote){row.push(cell); cell="";}
+    else if((ch==='\n' || ch==='\r') && !quote){if(ch==='\r' && next==='\n') i++; row.push(cell); rows.push(row); row=[]; cell="";}
+    else{cell+=ch;}
+  }
+  row.push(cell); rows.push(row);
+  return rows.filter(r => r.some(c => clean(c)));
+}
+function toObjects(text){
+  const matrix=parseCSV(text);
+  const headers=(matrix[0] || []).map(h => clean(h).replace(/^\uFEFF/, ""));
+  return matrix.slice(1).map(row => {const o={}; headers.forEach((h,i)=>o[h]=row[i] ?? ""); return o;});
+}
+function transform(rows, map, type){
+  return rows.map(row => {const obj={type}; Object.entries(map).forEach(([k,col]) => obj[k]=clean(row[col])); obj.stars=starCount(obj.priority); obj.key=type+":"+obj.id; return obj;}).filter(x => x.id && x.name);
+}
+async function loadCSV(url){
+  const res = await fetch(url + "?v=" + Date.now());
+  if(!res.ok) throw new Error(url + " " + res.status);
+  return await res.text();
+}
+function current(){return mode === "plants" ? plants : seeds;}
+function unique(key){return [...new Set(current().map(x => x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
+function fillFilters(){
+  items=current();
+  const fA=$('filterA'); const fB=$('filterB');
+  fA.innerHTML='<option value="all">'+(mode==='plants'?'All locations':'All origins')+'</option>';
+  fB.innerHTML='<option value="all">All statuses</option>';
+  const keyA = mode === 'plants' ? 'location' : 'origin';
+  unique(keyA).forEach(v => {const o=document.createElement('option'); o.value=v; o.textContent=v; fA.appendChild(o);});
+  unique('status').forEach(v => {const o=document.createElement('option'); o.value=v; o.textContent=v; fB.appendChild(o);});
+}
+function matches(x){
+  const q=$('search').value.toLowerCase();
+  const keyA = mode === 'plants' ? 'location' : 'origin';
+  return (!q || Object.values(x).join(' ').toLowerCase().includes(q)) &&
+    ($('priority').value==='all' || x.stars >= Number($('priority').value)) &&
+    ($('filterA').value==='all' || x[keyA] === $('filterA').value) &&
+    ($('filterB').value==='all' || x.status === $('filterB').value);
+}
+function render(){
+  items=current();
+  const list=items.filter(matches);
+  $('total').textContent=items.length;
+  $('shown').textContent=list.length;
+  $('totalLabel').textContent=mode==='plants'?'Total taxa':'Seed lots';
+  $('highLabel').textContent=mode==='plants'?'★★★★★':'★★★★+';
+  $('extraLabel').textContent=mode==='plants'?'Greenhouse':'Travel lots';
+  $('high').textContent=mode==='plants'?items.filter(x=>x.stars===5).length:items.filter(x=>x.stars>=4).length;
+  $('extra').textContent=mode==='plants'?items.filter(x=>clean(x.location).toLowerCase().includes('greenhouse')).length:items.filter(x=>clean(x.source).toLowerCase().includes('travel')).length;
+  if(!list.length){$('grid').innerHTML='<div class="empty">No matching records.</div>'; return;}
+  $('grid').innerHTML=list.map(card).join('');
+}
+function card(x){
+  const leftLabel=mode==='plants'?'Location':'Count';
+  const leftValue=mode==='plants'?x.location:x.count;
+  const rightLabel=mode==='plants'?'Difficulty':'Sow by';
+  const rightValue=mode==='plants'?x.difficulty:x.sowby;
+  const noteLabel=mode==='plants'?'Notes':'Viability / notes';
+  const noteValue=mode==='plants'?x.notes:(x.difficulty || x.notes || '—');
+  return '<article class="card" data-key="'+esc(x.key)+'"><div class="body"><div class="top"><span class="badge family">'+esc(x.family||'—')+'</span><span class="badge priority">'+esc(x.priority||'—')+'</span></div><div><div class="name">'+esc(x.name)+'</div><div class="common">'+esc(x.common||'—')+'</div></div><div class="notes"><span class="label">'+noteLabel+'</span>'+esc(noteValue)+'</div><div class="mini"><div><span class="label">'+leftLabel+'</span><span class="value">'+esc(leftValue||'—')+'</span></div><div><span class="label">'+rightLabel+'</span><span class="value">'+esc(rightValue||'—')+'</span></div></div><div class="footer"><span>Origin: '+esc(x.origin||'—')+'</span><span>'+esc(x.id)+'</span></div></div></article>';
+}
+function openItem(key){
+  const x=byKey.get(key); if(!x) return;
+  $('badges').innerHTML='<span class="badge family">'+esc(x.family)+'</span> <span class="badge priority">'+esc(x.priority)+'</span> <span class="badge">'+esc(x.status)+'</span>';
+  $('title').textContent=x.name;
+  $('common').textContent=(x.common||'—')+' · '+x.id;
+  const fields = mode==='plants' ? [['id','ID'],['status','Status'],['priority','Priority'],['family','Family'],['origin','Origin'],['location','Location'],['difficulty','Difficulty'],['light','Light'],['water','Water'],['soil','Soil'],['buy','Where to buy'],['notes','Notes'],['confidence','Confidence']] : [['id','Seed Lot ID'],['status','Status'],['priority','Priority'],['family','Family'],['origin','Origin'],['source','Source type'],['count','Estimated count'],['difficulty','Viability'],['sowby','Sow by'],['pretreat','Pretreatment'],['germination','Germination'],['story','Provenance story'],['legal','Legal / visibility'],['notes','Species notes'],['confidence','Confidence']];
+  $('modal').innerHTML = fields.map(([k,l]) => '<div class="field '+(['notes','germination','story','legal','buy','soil','difficulty'].includes(k)?'full':'')+'"><div class="field-title">'+esc(l)+'</div><div class="field-value">'+esc(x[k]||'—')+'</div></div>').join('');
+  $('dlg').showModal();
+}
+function setMode(next){
+  mode=next;
+  $('plantsBtn').classList.toggle('active', mode==='plants');
+  $('seedsBtn').classList.toggle('active', mode==='seeds');
+  $('search').value=''; $('priority').value='all';
+  fillFilters(); render();
+}
+$('plantsBtn').addEventListener('click', () => setMode('plants'));
+$('seedsBtn').addEventListener('click', () => setMode('seeds'));
+$('closeBtn').addEventListener('click', () => $('dlg').close());
+['search','priority','filterA','filterB'].forEach(id => {$(id).addEventListener('input', render); $(id).addEventListener('change', render);});
+$('grid').addEventListener('click', (e) => {const card=e.target.closest('.card'); if(card) openItem(card.dataset.key);});
+(async function init(){
+  try{
+    const plantText=await loadCSV('plants.csv');
+    const seedText=await loadCSV('seeds.csv');
+    plants=transform(toObjects(plantText), plantMap, 'plants');
+    seeds=transform(toObjects(seedText), seedMap, 'seeds');
+    byKey=new Map([...plants,...seeds].map(x => [x.key,x]));
+    fillFilters(); render();
+    $('status').textContent='Loaded '+plants.length+' plants and '+seeds.length+' seed lots.';
+  }catch(err){
+    console.error(err);
+    $('status').textContent='Could not load catalogue files. Make sure index.html, plants.csv and seeds.csv are in the same folder.';
+    $('grid').innerHTML='<div class="empty">Could not load catalogue files.</div>';
+  }
+})();
+</script>
+</body>
+</html>
