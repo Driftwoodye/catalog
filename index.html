@@ -1,48 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Silveira Botanics</title>
 <style>
-:root{--line:#26354f;--text:#e5e7eb;--muted:#94a3b8;--green:#34d399;--amber:#fbbf24}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top left,#15382e 0,#0b1220 35%,#07101d 100%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{position:static;z-index:20;background:rgba(7,16,29,.94);border-bottom:1px solid var(--line)}.wrap{max-width:1280px;margin:0 auto;padding:6px 12px}h1{margin:0;color:var(--green);font-size:clamp(16px,2vw,20px);line-height:1}.subtitle{display:none}.tabs,.controls{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}button,input,select{background:#0f172a;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:13px}button{cursor:pointer}.tab.active{border-color:var(--green);color:var(--green);background:rgba(6,78,59,.35)}input{min-width:min(320px,100%)}main{max-width:1280px;margin:0 auto;padding:16px 12px 60px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}.card{background:linear-gradient(180deg,rgba(17,24,39,.97),rgba(15,23,42,.97));border:1px solid var(--line);border-radius:18px;overflow:hidden;min-height:315px;display:flex;flex-direction:column;cursor:pointer}.card:hover{border-color:#3f567a}.card-image,.thumb-placeholder{height:178px;background:#0b1220;border-bottom:1px solid rgba(38,53,79,.8)}.card-image img{display:block;width:100%;height:100%;object-fit:cover}.thumb-placeholder{display:flex;align-items:center;justify-content:center;padding:14px;text-align:center;color:#7c8aa5;font-size:12px;background:linear-gradient(135deg,rgba(21,56,46,.55),rgba(11,18,32,.95))}.body{padding:15px;display:flex;flex-direction:column;gap:12px;flex:1}.top{display:flex;justify-content:space-between;gap:10px}.badge{font-size:11px;border:1px solid var(--line);background:#0b1220;border-radius:999px;padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.family{color:var(--green);border-color:#14532d;background:rgba(6,78,59,.35)}.priority{color:var(--amber);border-color:#78350f;background:rgba(120,53,15,.25)}.name{font-size:20px;font-weight:800;font-style:italic;line-height:1.15}.common{color:var(--muted);font-size:13px;margin-top:3px}.notes{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:10px;font-size:12px;line-height:1.45;color:#cbd5e1;min-height:70px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini div{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:9px;min-width:0}.label{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:5px}.value{display:block;font-size:12px;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.footer{border-top:1px solid rgba(38,53,79,.8);padding-top:10px;display:flex;justify-content:space-between;gap:10px;color:#718096;font-size:11px}.empty{text-align:center;padding:50px 20px;color:var(--muted);border:1px dashed var(--line);border-radius:18px;background:rgba(17,24,39,.45);grid-column:1/-1}dialog{border:1px solid var(--line);border-radius:20px;background:#0f172a;color:var(--text);max-width:min(980px,94vw);width:980px;padding:0}dialog::backdrop{background:rgba(0,0,0,.65)}.modal-head{padding:18px 20px;background:#111827;border-bottom:1px solid var(--line);border-radius:20px 20px 0 0;display:flex;justify-content:space-between;gap:12px}.modal-body{padding:18px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-height:72vh;overflow:auto}.field{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:10px}.field.full{grid-column:1/-1}.field.media{padding:0;overflow:hidden}.field-title{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:6px}.field.media .field-title{padding:10px 10px 0}.field-value{font-size:13px;color:#e2e8f0;line-height:1.45;word-break:break-word}.field-value a{color:var(--green);text-decoration:none}.field-value a:hover{text-decoration:underline}.modal-media{display:block;width:100%;max-height:360px;object-fit:cover;background:#0b1220}.modal-caption{padding:0 10px 12px;color:#94a3b8;font-size:12px}.to-top{position:fixed;right:18px;bottom:18px;z-index:50;width:44px;height:44px;border-radius:50%;padding:0;font-size:22px;line-height:1;background:#0f172a;border:1px solid var(--green);color:var(--green);box-shadow:0 10px 25px rgba(0,0,0,.35);opacity:0;pointer-events:none;transform:translateY(12px);transition:.18s ease}.to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}@media(max-width:760px){.wrap{padding:5px 8px}h1{font-size:16px}.tabs,.controls{gap:5px;margin-top:5px}button,input,select{font-size:12px;padding:5px 7px}.modal-body{grid-template-columns:1fr}input,select{width:100%}.card-image,.thumb-placeholder{height:165px}main{padding:12px 8px 60px}}
+:root{--bg:#0b1220;--panel:#111827;--line:#26354f;--text:#e5e7eb;--muted:#94a3b8;--green:#34d399;--amber:#fbbf24}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top left,#15382e 0,#0b1220 35%,#07101d 100%);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{position:sticky;top:0;z-index:20;background:rgba(7,16,29,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.wrap{max-width:1280px;margin:0 auto;padding:12px 18px}h1{margin:0;color:var(--green);font-size:clamp(22px,3.4vw,30px);line-height:1.1}.subtitle{color:var(--muted);font-size:14px;margin-top:4px}.tabs,.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}button,input,select{background:#0f172a;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}button{cursor:pointer}.tab.active{border-color:var(--green);color:var(--green);background:rgba(6,78,59,.35)}input{min-width:min(370px,100%)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.stat{background:rgba(17,24,39,.75);border:1px solid var(--line);border-radius:14px;padding:12px}.num{font-size:24px;font-weight:800}.label{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:5px}main{max-width:1280px;margin:0 auto;padding:20px 18px 60px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}.card{background:linear-gradient(180deg,rgba(17,24,39,.97),rgba(15,23,42,.97));border:1px solid var(--line);border-radius:18px;overflow:hidden;min-height:315px;display:flex;flex-direction:column;cursor:pointer}.card:hover{border-color:#3f567a}.card-image,.thumb-placeholder{height:180px;background:#0b1220;border-bottom:1px solid rgba(38,53,79,.8)}.card-image img{display:block;width:100%;height:100%;object-fit:cover}.thumb-placeholder{display:flex;align-items:center;justify-content:center;padding:14px;text-align:center;color:#7c8aa5;font-size:12px;background:linear-gradient(135deg,rgba(21,56,46,.55),rgba(11,18,32,.95))}.body{padding:15px;display:flex;flex-direction:column;gap:12px;flex:1}.top{display:flex;justify-content:space-between;gap:10px}.badge{font-size:11px;border:1px solid var(--line);background:#0b1220;border-radius:999px;padding:6px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.family{color:var(--green);border-color:#14532d;background:rgba(6,78,59,.35)}.priority{color:var(--amber);border-color:#78350f;background:rgba(120,53,15,.25)}.name{font-size:20px;font-weight:800;font-style:italic;line-height:1.15}.common{color:var(--muted);font-size:13px;margin-top:3px}.notes{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:10px;font-size:12px;line-height:1.45;color:#cbd5e1;min-height:70px}.mini{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini div{background:#0b1220;border:1px solid rgba(38,53,79,.8);border-radius:12px;padding:9px;min-width:0}.value{display:block;font-size:12px;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.footer{border-top:1px solid rgba(38,53,79,.8);padding-top:10px;display:flex;justify-content:space-between;gap:10px;color:#718096;font-size:11px}.empty{text-align:center;padding:50px 20px;color:var(--muted);border:1px dashed var(--line);border-radius:18px;background:rgba(17,24,39,.45);grid-column:1/-1}dialog{border:1px solid var(--line);border-radius:20px;background:#0f172a;color:var(--text);max-width:min(980px,94vw);width:980px;padding:0}dialog::backdrop{background:rgba(0,0,0,.65)}.modal-head{padding:18px 20px;background:#111827;border-bottom:1px solid var(--line);border-radius:20px 20px 0 0;display:flex;justify-content:space-between;gap:12px}.modal-body{padding:18px 20px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-height:72vh;overflow:auto}.field{background:#0b1220;border:1px solid var(--line);border-radius:12px;padding:10px}.field.full{grid-column:1/-1}.field-title{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;margin-bottom:6px}.field-value{font-size:13px;color:#e2e8f0;line-height:1.45;word-break:break-word}.hidden{display:none!important}@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.modal-body{grid-template-columns:1fr}input,select{width:100%}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><h1>Silveira Botanics</h1><div class="subtitle">Plant and seed catalogue</div><div class="tabs"><button id="plantsBtn" class="tab active">Plants</button><button id="seedsBtn" class="tab">Seeds</button></div><div class="controls"><input id="search" type="search" placeholder="Search..."><select id="priority"><option value="all">All priorities</option><option value="5">★★★★★ only</option><option value="4">★★★★ and up</option><option value="3">★★★ and up</option><option value="2">★★ and up</option></select><select id="filterFamily"><option value="all">All families</option></select><select id="filterA"><option value="all">All locations</option></select><select id="filterB"><option value="all">All statuses</option></select></div><p id="status" class="subtitle"></p></div></header>
+<header>
+  <div class="wrap">
+    <h1>Silveira Botanics</h1>
+    <div class="subtitle">Plant and seed catalogue</div>
+    <div class="tabs">
+      <button id="plantsBtn" class="tab active">Plants</button>
+      <button id="seedsBtn" class="tab">Seeds</button>
+    </div>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search..." />
+      <select id="priority"><option value="all">All priorities</option><option value="5">★★★★★ only</option><option value="4">★★★★ and up</option><option value="3">★★★ and up</option></select>
+      <select id="filterA"><option value="all">All locations</option></select>
+      <select id="filterB"><option value="all">All statuses</option></select>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num" id="total">—</div><div class="label" id="totalLabel">Total</div></div>
+      <div class="stat"><div class="num" id="shown">—</div><div class="label">Shown</div></div>
+      <div class="stat"><div class="num" id="high">—</div><div class="label" id="highLabel">High</div></div>
+      <div class="stat"><div class="num" id="extra">—</div><div class="label" id="extraLabel">Extra</div></div>
+    </div>
+    <p id="status" class="subtitle">Loading...</p>
+  </div>
+</header>
 <main><div id="grid" class="grid"><div class="empty">Loading catalogue...</div></div></main>
-<button id="toTop" class="to-top" aria-label="Back to top" title="Back to top">↑</button>
 <dialog id="dlg"><div class="modal-head"><div><div id="badges"></div><div id="title" class="name"></div><div id="common" class="common"></div></div><button id="closeBtn">Close</button></div><div id="modal" class="modal-body"></div></dialog>
 <script>
 const $ = (id) => document.getElementById(id);
-const plantMap = {id:"Wishlist ID",priority:"Priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",commonDe:"Common name DE",commonPt:"Common name PT",origin:"Native origin",location:"Future location",difficulty:"Difficulty",notes:"Notes",confidence:"Confidence",light:"Light needs",water:"Water needs",soil:"Soil / substrate",substrate:"Recommended substrate mix (%)",buy:"Where to buy EU/UK",wiki:"Wikipedia",powo:"Kew POWO / source search",rarity:"Rarity in cultivation",conservation:"Conservation / endangerment level",pollinators:"Pollinators / ecology"};
-const seedMap = {id:"Seed Lot ID",priority:"Germination priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",commonDe:"Common name DE",commonPt:"Common name PT",origin:"Seed lot origin",difficulty:"Viability status",notes:"Species notes",confidence:"Confidence",count:"Estimated seed count",sowby:"Estimated sow-by date",pretreat:"Pretreatment needed",germination:"Germination instructions",source:"Source type",wikiTitle:"Wikipedia title",wiki:"Wikipedia"};
-let mode = "plants", plants = [], seeds = [], imageRows = [], items = [], byKey = new Map();
-const imageCache = new Map(), wikiImageBatchSize = 12;
+const plantMap = {id:"Wishlist ID",priority:"Priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",origin:"Native origin",location:"Future location",difficulty:"Difficulty",notes:"Notes",confidence:"Confidence",light:"Light needs",water:"Water needs",soil:"Soil / substrate",buy:"Where to buy EU/UK"};
+const seedMap = {id:"Seed Lot ID",priority:"Germination priority",status:"Status",name:"Scientific name",family:"Family",common:"Common name EN",origin:"Seed lot origin",location:"Seed lot origin",difficulty:"Viability status",notes:"Species notes",confidence:"Confidence",count:"Estimated seed count",sowby:"Estimated sow-by date",pretreat:"Pretreatment needed",germination:"Germination instructions",source:"Source type",wikiTitle:"Wikipedia title",wiki:"Wikipedia URL"};
+let mode = "plants";
+let plants = [];
+let seeds = [];
+let items = [];
+let byKey = new Map();
+const wikiImageCache = new Map();
 function clean(v){return (v ?? "").toString().trim();}
-function esc(v){return clean(v).replace(/[&<>'"]/g,function(c){if(c==='&')return '&amp;';if(c==='<')return '&lt;';if(c==='>')return '&gt;';if(c==="'")return '&#39;';return '&quot;';});}
+function esc(v){return clean(v).replace(/[&<>'"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c];});}
 function starCount(v){return clean(v).split("★").length - 1;}
-function parseCSV(text){const rows=[];let row=[],cell="",quote=false;for(let i=0;i<text.length;i++){const ch=text[i],next=text[i+1];if(ch==='"'&&quote&&next==='"'){cell+='"';i++;}else if(ch==='"'){quote=!quote;}else if(ch===','&&!quote){row.push(cell);cell="";}else if((ch==='\n'||ch==='\r')&&!quote){if(ch==='\r'&&next==='\n')i++;row.push(cell);rows.push(row);row=[];cell="";}else{cell+=ch;}}row.push(cell);rows.push(row);return rows.filter(r=>r.some(c=>clean(c)));}
-function toObjects(text){const matrix=parseCSV(text);const headers=(matrix[0]||[]).map(h=>clean(h).replace(/^\uFEFF/,""));return matrix.slice(1).map(row=>{const o={};headers.forEach((h,i)=>o[h]=row[i]??"");return o;});}
-function transform(rows,map,type){return rows.map(row=>{const obj={type};Object.entries(map).forEach(([k,col])=>obj[k]=clean(row[col]));obj.stars=starCount(obj.priority);obj.key=type+":"+obj.id;return obj;}).filter(x=>x.id&&x.name);}
-async function loadCSV(url){const res=await fetch(url+"?v="+Date.now());if(!res.ok)throw new Error(url+" "+res.status);return await res.text();}
-function current(){return mode==="plants"?plants:seeds;}
-function unique(key){return [...new Set(current().map(x=>x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
-function fillFilters(){items=current();const fam=$('filterFamily'),fA=$('filterA'),fB=$('filterB');fam.innerHTML='<option value="all">All families</option>';fA.innerHTML='<option value="all">All locations</option>';fB.innerHTML='<option value="all">All statuses</option>';unique('family').forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;fam.appendChild(o);});unique('status').forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;fB.appendChild(o);});if(mode==='plants'){fA.style.display='';unique('location').forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;fA.appendChild(o);});}else{fA.style.display='none';fA.value='all';}}
-function matches(x){const q=$('search').value.toLowerCase();return(!q||Object.values(x).join(' ').toLowerCase().includes(q))&&($('priority').value==='all'||x.stars>=Number($('priority').value))&&($('filterFamily').value==='all'||x.family===$('filterFamily').value)&&($('filterA').value==='all'||mode==='seeds'||x.location===$('filterA').value)&&($('filterB').value==='all'||x.status===$('filterB').value);}
-function wikiTitle(x){const fromLink=clean(x.wiki).split('/wiki/')[1];const raw=clean(x.wikiTitle)||(fromLink?fromLink.replace(/_/g,' '):'')||clean(x.name);try{return decodeURIComponent(raw);}catch(e){return raw;}}
-function itemImage(x){return imageCache.get(wikiTitle(x))||imageCache.get(x.key)||null;}
-function render(){items=current();const list=items.filter(matches);if(!list.length){$('grid').innerHTML='<div class="empty">No matching records.</div>';return;}$('grid').innerHTML=list.map(card).join('');}
-function imageBlock(x){const img=itemImage(x);if(img&&img.src){return '<div class="card-image"><img loading="lazy" src="'+esc(img.src)+'" alt="'+esc(x.name)+'"></div>';}return '<div class="thumb-placeholder">Image loading...</div>';}
-function card(x){const leftLabel=mode==='plants'?'Location':'Count',leftValue=mode==='plants'?x.location:x.count,rightLabel=mode==='plants'?'Difficulty':'Sow by',rightValue=mode==='plants'?x.difficulty:x.sowby,noteLabel=mode==='plants'?'Notes':'Viability / notes',noteValue=mode==='plants'?x.notes:(x.difficulty||x.notes||'—');return '<article class="card" data-key="'+esc(x.key)+'">'+imageBlock(x)+'<div class="body"><div class="top"><span class="badge family">'+esc(x.family||'—')+'</span><span class="badge priority">'+esc(x.priority||'—')+'</span></div><div><div class="name">'+esc(x.name)+'</div><div class="common">'+esc(x.common||'—')+'</div></div><div class="notes"><span class="label">'+noteLabel+'</span>'+esc(noteValue)+'</div><div class="mini"><div><span class="label">'+leftLabel+'</span><span class="value">'+esc(leftValue||'—')+'</span></div><div><span class="label">'+rightLabel+'</span><span class="value">'+esc(rightValue||'—')+'</span></div></div><div class="footer"><span>Origin: '+esc(x.origin||'—')+'</span><span>'+esc(x.id)+'</span></div></div></article>';}
-function fieldHtml(value){const v=clean(value);if(!v)return '—';if(/^https?:\/\//i.test(v))return '<a href="'+esc(v)+'" target="_blank" rel="noopener noreferrer">'+esc(v)+'</a>';return esc(v);}
-function openItem(key){const x=byKey.get(key);if(!x)return;$('badges').innerHTML='<span class="badge family">'+esc(x.family)+'</span> <span class="badge priority">'+esc(x.priority)+'</span> <span class="badge">'+esc(x.status)+'</span>';$('title').textContent=x.name;$('common').textContent=(x.common||'—')+' · '+x.id;const img=itemImage(x),media=(img&&img.src)?'<div class="field full media"><div class="field-title">Reference image</div><img class="modal-media" src="'+esc(img.src)+'" alt="'+esc(x.name)+'"><div class="modal-caption">Wikipedia / Wikimedia representative adult-plant image.</div></div>':'';const fields=mode==='plants'?[['id','ID'],['status','Status'],['priority','Priority'],['family','Family'],['origin','Origin'],['location','Location'],['difficulty','Difficulty'],['light','Light'],['water','Water'],['soil','Soil'],['substrate','Recommended substrate mix (%)'],['rarity','Rarity in cultivation'],['conservation','Conservation'],['pollinators','Pollinators / ecology'],['buy','Where to buy'],['wiki','Wikipedia'],['powo','Kew POWO / source search'],['notes','Notes'],['confidence','Confidence']]:[['id','Seed Lot ID'],['status','Status'],['priority','Germination priority'],['family','Family'],['common','Common name EN'],['commonDe','Common name DE'],['commonPt','Common name PT'],['origin','Origin'],['source','Source type'],['count','Estimated count'],['difficulty','Viability'],['sowby','Sow by'],['pretreat','Pretreatment'],['germination','Germination'],['wiki','Wikipedia'],['notes','Species notes'],['confidence','Confidence']];$('modal').innerHTML=media+fields.map(([k,l])=>'<div class="field '+(['notes','germination','buy','soil','substrate','difficulty','wiki','powo','conservation','pollinators'].includes(k)?'full':'')+'"><div class="field-title">'+esc(l)+'</div><div class="field-value">'+fieldHtml(x[k])+'</div></div>').join('');$('dlg').showModal();}
-function setMode(next){mode=next;$('plantsBtn').classList.toggle('active',mode==='plants');$('seedsBtn').classList.toggle('active',mode==='seeds');$('search').value='';$('priority').value='all';$('filterFamily').value='all';$('filterB').value='all';fillFilters();render();}
-function loadManualPlantImages(){imageRows.forEach(r=>{const id=clean(r['Wishlist ID']),url=clean(r['Image URL']);if(id&&url)imageCache.set('plants:'+id,{src:url,page:clean(r['Source URL'])});});}
-async function fetchCatalogueImages(records){const titles=[...new Set(records.map(wikiTitle).filter(Boolean))].filter(t=>!imageCache.has(t));for(let i=0;i<titles.length;i+=wikiImageBatchSize){await fetchWikiBatch(titles.slice(i,i+wikiImageBatchSize));}}
-async function fetchWikiBatch(titles){if(!titles.length)return;titles.forEach(t=>imageCache.set(t,{pending:true}));const url='https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&redirects=1&prop=pageimages|info&inprop=url&piprop=thumbnail&pithumbsize=800&titles='+encodeURIComponent(titles.join('|'));try{const res=await fetch(url),data=await res.json(),pages=Object.values((data.query&&data.query.pages)||{}),normalized=new Map(((data.query&&data.query.normalized)||[]).map(x=>[x.to,x.from])),redirects=new Map(((data.query&&data.query.redirects)||[]).map(x=>[x.to,x.from]));pages.forEach(page=>{if(!page||!page.title)return;const entry={src:page.thumbnail&&page.thumbnail.source?page.thumbnail.source:'',page:page.fullurl||('https://en.wikipedia.org/wiki/'+page.title.replace(/ /g,'_'))};imageCache.set(page.title,entry);if(normalized.has(page.title))imageCache.set(normalized.get(page.title),entry);if(redirects.has(page.title))imageCache.set(redirects.get(page.title),entry);});titles.forEach(t=>{if(imageCache.get(t)?.pending)imageCache.set(t,{src:'',page:'https://en.wikipedia.org/wiki/'+t.replace(/ /g,'_')});});}catch(err){console.error('Wikipedia image fetch failed',err);titles.forEach(t=>imageCache.set(t,{src:'',page:'https://en.wikipedia.org/wiki/'+t.replace(/ /g,'_')}));}render();}
-$('plantsBtn').addEventListener('click',()=>setMode('plants'));$('seedsBtn').addEventListener('click',()=>setMode('seeds'));$('closeBtn').addEventListener('click',()=>$('dlg').close());['search','priority','filterFamily','filterA','filterB'].forEach(id=>{$(id).addEventListener('input',render);$(id).addEventListener('change',render);});$('grid').addEventListener('click',e=>{const card=e.target.closest('.card');if(card)openItem(card.dataset.key);});window.addEventListener('scroll',()=>{$('toTop').classList.toggle('show',window.scrollY>500);});$('toTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-(async function init(){try{const plantText=await loadCSV('plants.csv'),seedText=await loadCSV('seeds.csv');let imageText='';try{imageText=await loadCSV('images.csv');}catch(e){imageText='';}plants=transform(toObjects(plantText),plantMap,'plants');seeds=transform(toObjects(seedText),seedMap,'seeds');imageRows=imageText?toObjects(imageText):[];byKey=new Map([...plants,...seeds].map(x=>[x.key,x]));loadManualPlantImages();fillFilters();render();fetchCatalogueImages([...plants,...seeds]);}catch(err){console.error(err);$('status').textContent='Could not load catalogue files. Make sure index.html, plants.csv, seeds.csv and images.csv are in the same folder.';$('grid').innerHTML='<div class="empty">Could not load catalogue files.</div>';}})();
+function commonCardHtml(x){
+  const parts=[];
+  if(clean(x.common)) parts.push('EN: ' + esc(x.common));
+  if(clean(x.commonDe)) parts.push('DE: ' + esc(x.commonDe));
+  if(clean(x.commonPt)) parts.push('PT: ' + esc(x.commonPt));
+  return parts.join(' · ' ) || '—';
+}
+function commonHeaderHtml(x){
+  const parts=[];
+  if(clean(x.common)) parts.push('EN: ' + esc(x.common));
+  if(clean(x.commonDe)) parts.push('DE: ' + esc(x.commonDe));
+  if(clean(x.commonPt)) parts.push('PT: ' + esc(x.commonPt));
+  parts.push(esc(x.id));
+  return parts.join(' · ');
+}
+function parseCSV(text){
+  const rows=[]; let row=[]; let cell=""; let quote=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i]; const next=text[i+1];
+    if(ch==='"' && quote && next==='"'){cell+='"'; i++;}
+    else if(ch==='"'){quote=!quote;}
+    else if(ch===',' && !quote){row.push(cell); cell="";}
+    else if((ch==='\n' || ch==='\r') && !quote){if(ch==='\r' && next==='\n') i++; row.push(cell); rows.push(row); row=[]; cell="";}
+    else{cell+=ch;}
+  }
+  row.push(cell); rows.push(row);
+  return rows.filter(r => r.some(c => clean(c)));
+}
+function toObjects(text){
+  const matrix=parseCSV(text);
+  const headers=(matrix[0] || []).map(h => clean(h).replace(/^\uFEFF/, ""));
+  return matrix.slice(1).map(row => {const o={}; headers.forEach((h,i)=>o[h]=row[i] ?? ""); return o;});
+}
+function transform(rows, map, type){
+  return rows.map(row => {const obj={type}; Object.entries(map).forEach(([k,col]) => obj[k]=clean(row[col])); obj.stars=starCount(obj.priority); obj.key=type+":"+obj.id; return obj;}).filter(x => x.id && x.name);
+}
+async function loadCSV(url){
+  const res = await fetch(url + "?v=" + Date.now());
+  if(!res.ok) throw new Error(url + " " + res.status);
+  return await res.text();
+}
+function current(){return mode === "plants" ? plants : seeds;}
+function unique(key){return [...new Set(current().map(x => x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
+function fillFilters(){
+  items=current();
+  const fA=$('filterA'); const fB=$('filterB');
+  fB.innerHTML='<option value="all">All statuses</option>';
+  if(mode === 'plants'){
+    fA.classList.remove('hidden');
+    fA.innerHTML='<option value="all">All locations</option>';
+    unique('location').forEach(v => {const o=document.createElement('option'); o.value=v; o.textContent=v; fA.appendChild(o);});
+  } else {
+    fA.value='all';
+    fA.classList.add('hidden');
+    fA.innerHTML='<option value="all">All origins</option>';
+  }
+  unique('status').forEach(v => {const o=document.createElement('option'); o.value=v; o.textContent=v; fB.appendChild(o);});
+}
+function matches(x){
+  const q=$('search').value.toLowerCase();
+  const locationOk = mode === 'plants' ? ($('filterA').value==='all' || x.location === $('filterA').value) : true;
+  return (!q || Object.values(x).join(' ').toLowerCase().includes(q)) &&
+    ($('priority').value==='all' || x.stars >= Number($('priority').value)) &&
+    locationOk &&
+    ($('filterB').value==='all' || x.status === $('filterB').value);
+}
+function seedWikiTitle(x){return clean(x.wikiTitle || x.name).replace(/\s+/g,' ');}
+function seedImage(x){return wikiImageCache.get(seedWikiTitle(x)) || null;}
+function seedImageBlock(x){const img=seedImage(x); return img&&img.src ? '<div class="card-image"><img loading="lazy" src="'+esc(img.src)+'" alt="'+esc(x.name)+'"></div>' : '<div class="thumb-placeholder">Wikipedia image loading…</div>';}
+async function fetchSeedImages(){
+  const titles=[...new Set(seeds.map(seedWikiTitle).filter(Boolean))];
+  for(let i=0;i<titles.length;i+=8){
+    const batch=titles.slice(i,i+8);
+    const url='https://en.wikipedia.org/w/api.php?origin=*&format=json&action=query&redirects=1&prop=pageimages|info&inprop=url&piprop=thumbnail&pithumbsize=800&titles='+encodeURIComponent(batch.join('|'));
+    try{const res=await fetch(url); const data=await res.json(); const pages=Object.values((data.query&&data.query.pages)||{}); pages.forEach(p=>{if(p&&p.title){wikiImageCache.set(p.title,{src:p.thumbnail&&p.thumbnail.source?p.thumbnail.source:'',page:p.fullurl||''});}}); batch.forEach(t=>{if(!wikiImageCache.has(t)) wikiImageCache.set(t,{src:'',page:''});}); if(mode==='seeds') render();}catch(e){console.error(e);}
+  }
+}
+function render(){
+  items=current();
+  const list=items.filter(matches);
+  $('total').textContent=items.length;
+  $('shown').textContent=list.length;
+  $('totalLabel').textContent=mode==='plants'?'Total taxa':'Seed lots';
+  $('highLabel').textContent=mode==='plants'?'★★★★★':'★★★★+';
+  $('extraLabel').textContent=mode==='plants'?'Greenhouse':'Travel lots';
+  $('high').textContent=mode==='plants'?items.filter(x=>x.stars===5).length:items.filter(x=>x.stars>=4).length;
+  $('extra').textContent=mode==='plants'?items.filter(x=>clean(x.location).toLowerCase().includes('greenhouse')).length:items.filter(x=>clean(x.source).toLowerCase().includes('travel')).length;
+  if(!list.length){$('grid').innerHTML='<div class="empty">No matching records.</div>'; return;}
+  $('grid').innerHTML=list.map(card).join('');
+}
+function card(x){
+  const leftLabel=mode==='plants'?'Location':'Count';
+  const leftValue=mode==='plants'?x.location:x.count;
+  const rightLabel=mode==='plants'?'Difficulty':'Sow by';
+  const rightValue=mode==='plants'?x.difficulty:x.sowby;
+  const noteLabel=mode==='plants'?'Notes':'Viability / notes';
+  const noteValue=mode==='plants'?x.notes:(x.difficulty || x.notes || '—');
+  const imageBlock = mode==='seeds' ? seedImageBlock(x) : '';
+  return '<article class="card" data-key="'+esc(x.key)+'">'+imageBlock+'<div class="body"><div class="top"><span class="badge family">'+esc(x.family||'—')+'</span><span class="badge priority">'+esc(x.priority||'—')+'</span></div><div><div class="name">'+esc(x.name)+'</div><div class="common">'+commonCardHtml(x)+'</div></div><div class="notes"><span class="label">'+noteLabel+'</span>'+esc(noteValue)+'</div><div class="mini"><div><span class="label">'+leftLabel+'</span><span class="value">'+esc(leftValue||'—')+'</span></div><div><span class="label">'+rightLabel+'</span><span class="value">'+esc(rightValue||'—')+'</span></div></div><div class="footer"><span>Origin: '+esc(x.origin||'—')+'</span><span>'+esc(x.id)+'</span></div></div></article>';
+}
+function fieldHtml(v){v=clean(v); if(!v) return '—'; if(/^https?:\/\//i.test(v)) return '<a href="'+esc(v)+'" target="_blank" rel="noopener noreferrer">'+esc(v)+'</a>'; return esc(v);}
+function openItem(key){
+  const x=byKey.get(key); if(!x) return;
+  $('badges').innerHTML='<span class="badge family">'+esc(x.family)+'</span> <span class="badge priority">'+esc(x.priority)+'</span> <span class="badge">'+esc(x.status)+'</span>';
+  $('title').textContent=x.name;
+  $('common').innerHTML=commonHeaderHtml(x);
+  const fields = mode==='plants' ? [['id','ID'],['status','Status'],['priority','Priority'],['family','Family'],['common','Common name EN'],['commonDe','Common name DE'],['commonPt','Common name PT'],['origin','Origin'],['location','Location'],['difficulty','Difficulty'],['light','Light'],['water','Water'],['soil','Soil'],['buy','Where to buy'],['wiki','Wikipedia'],['notes','Notes'],['confidence','Confidence']] : [['id','Seed Lot ID'],['status','Status'],['priority','Priority'],['family','Family'],['common','Common name EN'],['commonDe','Common name DE'],['commonPt','Common name PT'],['origin','Origin'],['source','Source type'],['count','Estimated count'],['difficulty','Viability'],['sowby','Sow by'],['pretreat','Pretreatment'],['germination','Germination'],['wiki','Wikipedia'],['notes','Species notes'],['confidence','Confidence']];
+  $('modal').innerHTML = fields.map(([k,l]) => '<div class="field '+(['notes','germination','buy','soil','difficulty','wiki'].includes(k)?'full':'')+'"><div class="field-title">'+esc(l)+'</div><div class="field-value">'+fieldHtml(x[k])+'</div></div>').join('');
+  $('dlg').showModal();
+}
+function setMode(next){
+  mode=next;
+  $('plantsBtn').classList.toggle('active', mode==='plants');
+  $('seedsBtn').classList.toggle('active', mode==='seeds');
+  $('search').value=''; $('priority').value='all'; $('filterA').value='all';
+  fillFilters(); render();
+}
+$('plantsBtn').addEventListener('click', () => setMode('plants'));
+$('seedsBtn').addEventListener('click', () => setMode('seeds'));
+$('closeBtn').addEventListener('click', () => $('dlg').close());
+['search','priority','filterA','filterB'].forEach(id => {$(id).addEventListener('input', render); $(id).addEventListener('change', render);});
+$('grid').addEventListener('click', (e) => {const card=e.target.closest('.card'); if(card) openItem(card.dataset.key);});
+(async function init(){
+  try{
+    const plantText=await loadCSV('plants.csv');
+    const seedText=await loadCSV('seeds.csv');
+    plants=transform(toObjects(plantText), plantMap, 'plants');
+    seeds=transform(toObjects(seedText), seedMap, 'seeds');
+    byKey=new Map([...plants,...seeds].map(x => [x.key,x]));
+    fillFilters(); render();
+    $('status').textContent='Loaded '+plants.length+' plants and '+seeds.length+' seed lots.';
+    fetchSeedImages();
+  }catch(err){
+    console.error(err);
+    $('status').textContent='Could not load catalogue files. Make sure index.html, plants.csv and seeds.csv are in the same folder.';
+    $('grid').innerHTML='<div class="empty">Could not load catalogue files.</div>';
+  }
+})();
 </script>
 </body>
 </html>
