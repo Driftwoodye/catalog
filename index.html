@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-<header><div class="wrap"><h1>Driftwood Garden</h1><div class="tabs"><button id="seedsBtn" class="tab active">Seeds</button><button id="plantsBtn" class="tab">Plants</button><button id="wishlistBtn" class="tab">Wishlist</button></div><div id="legend" class="legend"></div><div class="controls"><input id="search" type="search" placeholder="Search..."><select id="priority"></select><select id="filterFamily"><option value="all">All families</option></select><select id="filterA"><option value="all">All locations</option></select><select id="filterB"><option value="all">All statuses</option></select></div></div></header>
+<header><div class="wrap"><h1>Driftwood Garden</h1><div class="tabs"><button id="plantsBtn" class="tab active">Plants</button><button id="seedsBtn" class="tab">Seeds</button><button id="wishlistBtn" class="tab">Wishlist</button></div><div id="legend" class="legend"></div><div class="controls"><input id="search" type="search" placeholder="Search..."><select id="priority"></select><select id="filterFamily"><option value="all">All families</option></select><select id="filterA"><option value="all">All locations</option></select><select id="filterB"><option value="all">All statuses</option></select></div></div></header>
 <main><div id="grid" class="grid"><div class="empty">Loading catalogue...</div></div></main>
 <button id="toTop" class="to-top" aria-label="Back to top" title="Back to top">↑</button>
 <dialog id="dlg"><div class="modal-head"><div><div id="badges"></div><div id="title" class="name"></div><div id="common" class="common"></div></div><button id="closeBtn">Close</button></div><div id="modal" class="modal-body"></div></dialog>
@@ -23,7 +23,7 @@ const maps={
 const files={wishlist:'plants.csv',plants:'owned-plants.csv',seeds:'seeds.csv',seedExtras:'seeds-extra.csv'};
 const legends={wishlist:'Star rating: desirability',plants:'Star rating: care difficulty',seeds:'Star rating: viability urgency'};
 const ratingLabels={wishlist:'All star ratings',plants:'All star ratings',seeds:'All star ratings'};
-let mode='seeds',data={wishlist:[],plants:[],seeds:[]},imageRows=[],byKey=new Map(),imageCache=new Map();
+let mode='plants',data={wishlist:[],plants:[],seeds:[]},imageRows=[],byKey=new Map(),imageCache=new Map();
 function clean(v){return(v??'').toString().trim()}
 function esc(v){return clean(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function stars(v){return clean(v).split('★').length-1}
