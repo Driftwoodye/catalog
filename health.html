@@ -70,7 +70,7 @@ async function loadCSV(path){
 }
 async function wikiHasImage(title){
   if(!title)return false;
-  const url='https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=pageimages&piprop=thumbnail&pithumbsize=300&titles='+encodeURIComponent(title);
+  const url='https://en.wikipedia.org/w/api.php?action=query&redirects=1&origin=*&format=json&prop=pageimages&piprop=thumbnail&pithumbsize=300&titles='+encodeURIComponent(title);
   try{const j=await fetch(url).then(r=>r.json());return Object.values(j.query?.pages||{}).some(p=>p.thumbnail?.source)}catch(e){return false}
 }
 function keyvals(row){return [row['Plant ID'],row['Wishlist ID'],row['Seed Lot ID'],row['Scientific name'],row['Wikipedia title']].filter(Boolean)}
