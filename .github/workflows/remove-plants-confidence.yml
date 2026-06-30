@@ -1,0 +1,33 @@
+name: Remove plants confidence
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-plants-confidence.yml'
+permissions:
+  contents: write
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove Confidence column from plants.csv
+        run: |
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+          p=Path('plants.csv')
+          rows=list(csv.reader(p.open(newline='', encoding='utf-8-sig')))
+          if rows and rows[0] and rows[0][-1].strip() == 'Confidence':
+              width=len(rows[0])
+              rows=[r[:-1] if len(r)==width else r for r in rows]
+              with p.open('w', newline='', encoding='utf-8') as f:
+                  csv.writer(f).writerows(rows)
+          PY
+      - name: Commit cleaned file
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add plants.csv
+          git commit -m 'Remove confidence column from wishlist'
+          git push
