@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wishlist import helper</title>
+<style>
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;background:#07101d;color:#e5e7eb;padding:18px;line-height:1.45}main{max-width:760px;margin:auto}h1{color:#34d399;font-size:24px;margin:0 0 12px}.box{background:#0f172a;border:1px solid #26354f;border-radius:16px;padding:14px;margin:12px 0}button{width:100%;border:1px solid #34d399;background:#064e3b;color:#fff;border-radius:12px;padding:14px 16px;font-weight:800;font-size:16px}button:disabled{opacity:.5}textarea{width:100%;height:260px;background:#0b1220;color:#e5e7eb;border:1px solid #26354f;border-radius:12px;padding:10px;font-family:ui-monospace,monospace;font-size:11px}.small{color:#94a3b8;font-size:13px}.ok{color:#34d399}.err{color:#f87171}code{background:#0b1220;border:1px solid #26354f;border-radius:7px;padding:2px 5px}</style>
+</head>
+<body>
+<main>
+<h1>Wishlist import helper</h1>
+<div class="box">
+<p>This page converts <code>plants.csv</code> into tab-separated text so Google Sheets mobile can paste it into cells.</p>
+<button id="copyBtn">Copy full old wishlist for Google Sheets</button>
+<p id="status" class="small">Loading old wishlist...</p>
+</div>
+<div class="box">
+<p class="small">After copying: open the Google Sheet → <code>wishlist</code> tab → clear the sheet → tap A1 → paste.</p>
+</div>
+<textarea id="out" readonly placeholder="Converted wishlist will appear here..."></textarea>
+</main>
+<script>
+const statusEl=document.getElementById('status'),out=document.getElementById('out'),btn=document.getElementById('copyBtn');
+let tsv='';
+function clean(v){return(v??'').toString()}
+function parseCSV(text){const rows=[];let row=[],cell='',quote=false;for(let i=0;i<text.length;i++){const ch=text[i],next=text[i+1];if(ch==='"'&&quote&&next==='"'){cell+='"';i++}else if(ch==='"'){quote=!quote}else if(ch===','&&!quote){row.push(cell);cell=''}else if((ch==='\n'||ch==='\r')&&!quote){if(ch==='\r'&&next==='\n')i++;row.push(cell);rows.push(row);row=[];cell=''}else cell+=ch}row.push(cell);rows.push(row);return rows.filter(r=>r.some(c=>clean(c).trim()))}
+function toTSV(rows){return rows.map(r=>r.map(c=>clean(c).replace(/\t/g,' ').replace(/\r?\n/g,' ')).join('\t')).join('\n')}
+async function load(){btn.disabled=true;try{const res=await fetch('plants.csv?v='+Date.now());if(!res.ok)throw new Error('plants.csv '+res.status);const text=await res.text();const rows=parseCSV(text);tsv=toTSV(rows);out.value=tsv;statusEl.innerHTML='<span class="ok">Ready.</span> Loaded '+(rows.length-1)+' wishlist rows plus header.';btn.disabled=false}catch(e){statusEl.innerHTML='<span class="err">Could not load plants.csv: '+e.message+'</span>'}}
+async function copy(){try{await navigator.clipboard.writeText(tsv);statusEl.innerHTML='<span class="ok">Copied.</span> Now paste into cell A1 in the wishlist tab.'}catch(e){out.focus();out.select();statusEl.innerHTML='<span class="err">Clipboard blocked.</span> Select all text below and copy manually.'}}
+btn.addEventListener('click',copy);load();
+</script>
+</body>
+</html>
